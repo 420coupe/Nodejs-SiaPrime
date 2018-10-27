@@ -20,13 +20,13 @@ requests.
 ## Installation
 
 ```
-npm install siap.js
+npm install siaprime.js
 ```
 
 ## Example Usage
 
 ```js
-import { connect } from 'siap.js'
+import { connect } from 'siaprime.js'
 
 // Using promises...
 // connect to an already running SiaPrime daemon on localhost:4280 and print its version
@@ -53,7 +53,7 @@ async function getVersion() {
 You can also forgo using `connect` and use `call` directly by providing an API address as the first parameter:
 
 ```js
-import { call } from 'siap.js'
+import { call } from 'siaprime.js'
 
 async function getVersion(address) {
   try {
@@ -67,10 +67,10 @@ async function getVersion(address) {
 console.log(getVersion('10.0.0.1:4280'))
 ```
 
-`siap.js` can also launch a spd instance given a path on disk to the `spd` binary.  `launch` takes an object defining the flags to use as its second argument, and returns the `child_process` object.  You are responsible for keeping track of the state of this `child_process` object, and catching any errors `launch` may throw.
+`siaprime.js` can also launch a spd instance given a path on disk to the `spd` binary.  `launch` takes an object defining the flags to use as its second argument, and returns the `child_process` object.  You are responsible for keeping track of the state of this `child_process` object, and catching any errors `launch` may throw.
 
 ```js
-import { launch } from 'siap.js'
+import { launch } from 'siaprime.js'
 
 try {
   // Flags are passed in as an object in the second argument to `launch`.
@@ -80,7 +80,7 @@ try {
     'profile': true,
   })
   // spdProcess is a ChildProcess class.  See https://nodejs.org/api/child_process.html#child_process_class_childprocess for more information on what you can do with it.
-  spdProcess.on('error', (err) => console.log('siad encountered an error ' + err))
+  spdProcess.on('error', (err) => console.log('spd encountered an error ' + err))
 } catch (e) {
   console.error('error launching spd: ' + e.toString())
 }
