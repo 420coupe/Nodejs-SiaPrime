@@ -15,8 +15,8 @@ const agent = new http.Agent({
 // siap.js error constants
 export const errCouldNotConnect = new Error('could not connect to the SiaPrime daemon')
 
-// Siacoin -> hastings unit conversion functions
-// These make conversion between units of Sia easy and consistent for developers.
+// SiaPrimecoin -> hastings unit conversion functions
+// These make conversion between units of SiaPrime easy and consistent for developers.
 // Never return exponentials from BigNumber.toString, since they confuse the API
 BigNumber.config({ EXPONENTIAL_AT: 1e+9 })
 BigNumber.config({ DECIMAL_PLACES: 30 })

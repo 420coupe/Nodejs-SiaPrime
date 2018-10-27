@@ -93,7 +93,7 @@ see how to access the full functionality of [SiaPrime's
 API](https://gitlab.com/SiaPrime/Sia/blob/master/doc/API.md)
 
 ```js
-Spd.call({
+spd.call({
   url: '/consensus/block',
   method: 'GET',
   qs: {

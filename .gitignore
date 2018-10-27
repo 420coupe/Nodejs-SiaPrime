@@ -7,3 +7,4 @@ lib
 
 # Vim
 *.swp
+.vs

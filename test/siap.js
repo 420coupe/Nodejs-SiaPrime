@@ -2,7 +2,7 @@
 import 'babel-polyfill'
 import BigNumber from 'bignumber.js'
 import Path from 'path'
-import { agent, siacoinsToHastings, call, hastingsToSiacoins, isRunning, connect, errCouldNotConnect } from '../src/siap.js'
+import { agent, siaprimecoinsToHastings, call, hastingsToSiaPrimecoins, isRunning, connect, errCouldNotConnect } from '../src/siap.js'
 import http from 'http'
 import readdir from 'readdir'
 import { expect } from 'chai'
@@ -46,11 +46,11 @@ describe('siap.js wrapper library', () => {
 			for (let i = 0; i < 999; i++) {
 				const h = maxH.times(Math.trunc(Math.random() * 100000) / 100000)
 				const expectedSiaPrimecoins = h.dividedBy(hastingsPerSiaPrimecoin)
-				expect(hastingsToSiacoins(h).toString()).to.equal(expectedSiacoins.toString())
+				expect(hastingsToSiaPrimecoins(h).toString()).to.equal(expectedSiaPrimecoins.toString())
 			}
 		})
 		it('does not lose precision during unit conversions', () => {
-			// convert from base unit -> siacoins n_iter times, comparing the (n_iter-times) converted value at the end.
+			// convert from base unit -> siaprimecoins n_iter times, comparing the (n_iter-times) converted value at the end.
 			// if precision loss were occuring, the original and the converted value would differ.
 			const n_iter = 10000
 			const originalSiaPrimecoin = new BigNumber('1337338498282837188273')
