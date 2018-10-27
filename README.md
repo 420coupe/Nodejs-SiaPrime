@@ -64,7 +64,7 @@ async function getVersion(address) {
   }
 }
 
-console.log(getVersion('10.0.0.1:9980'))
+console.log(getVersion('10.0.0.1:4280'))
 ```
 
 `siap.js` can also launch a spd instance given a path on disk to the `spd` binary.  `launch` takes an object defining the flags to use as its second argument, and returns the `child_process` object.  You are responsible for keeping track of the state of this `child_process` object, and catching any errors `launch` may throw.

@@ -2,7 +2,7 @@
 import 'babel-polyfill'
 import BigNumber from 'bignumber.js'
 import Path from 'path'
-import { agent, siaprimecoinsToHastings, call, hastingsToSiaPrimecoins, isRunning, connect, errCouldNotConnect } from '../src/siap.js'
+import { agent, siaprimecoinsToHastings, call, hastingsToSiaPrimecoins, isRunning, connect, errCouldNotConnect } from '../src/siaprime.js'
 import http from 'http'
 import readdir from 'readdir'
 import { expect } from 'chai'
@@ -25,13 +25,13 @@ const mock = {
 		spawn: stub().returns(mockProcessObject),
 	},
 }
-const { launch, makeRequest } = proxyquire('../src/siap.js', mock)
+const { launch, makeRequest } = proxyquire('../src/siaprime.js', mock)
 
 BigNumber.config({DECIMAL_PLACES: 28})
 
 const hastingsPerSiaPrimecoin = new BigNumber('1000000000000000000000000')
 
-describe('siap.js wrapper library', () => {
+describe('siaprime.js wrapper library', () => {
 	describe('unit conversion functions', () => {
 		it('converts from siaprimecoins to hastings correctly', () => {
 			const maxSC = new BigNumber('100000000000000000000000')

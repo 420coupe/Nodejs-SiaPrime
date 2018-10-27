@@ -1,12 +1,12 @@
 {
-  "name": "siap.js",
-  "version": "0.0.1",
+  "name": "siaprime.js",
+  "version": "0.0.3",
   "description": "Node wrapper for spd of the SiaPrime network",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/420coupe/Nodejs-SiaPrime.git"
   },
-  "main": "lib/siap.js",
+  "main": "lib/siaprime.js",
   "scripts": {
     "build": "babel -d lib/ src/",
     "test": "npm run lint && mocha --compilers js:babel-register --recursive ./test",
@@ -17,7 +17,7 @@
   },
   "keywords": [
     "SiaPrime",
-    "SiaP-UI",
+    "SiaPrime-UI",
     "Decentralized",
     "Cloud",
     "Storage",

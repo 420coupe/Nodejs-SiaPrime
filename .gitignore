@@ -8,3 +8,4 @@ lib
 # Vim
 *.swp
 .vs
+package-lock.json

@@ -1,4 +1,4 @@
-// siap.js: a lightweight node wrapper for starting, and communicating with
+// siaprime.js: a lightweight node wrapper for starting, and communicating with
 // a SiaPrime daemon (spd).
 import BigNumber from 'bignumber.js'
 import fs from 'fs'
@@ -12,7 +12,7 @@ const agent = new http.Agent({
 	maxSockets: 20,
 })
 
-// siap.js error constants
+// siaprime.js error constants
 export const errCouldNotConnect = new Error('could not connect to the SiaPrime daemon')
 
 // SiaPrimecoin -> hastings unit conversion functions
