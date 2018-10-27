@@ -1,16 +1,16 @@
-# [![Sia Logo](http://sia.tech/img/svg/sia-green-logo.svg)](http://sia.tech/) Nodejs Wrapper
+# [![SiaPrime Logo](https://siaprime.net/imagestore/primelogo_text_400x74.png](http://SiaPrime.net/) Nodejs Wrapper
 
-[![Build Status](https://travis-ci.org/NebulousLabs/Nodejs-Sia.svg?branch=master)](https://travis-ci.org/NebulousLabs/Nodejs-Sia)
+[![Build Status](https://api.travis-ci.org/420coupe/Nodejs-SiaPrime.svg?branch=master)](https://travis-ci.org/420coupe/Nodejs-SiaPrime)
 [![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](http://standardjs.com/)
-[![devDependency Status](https://david-dm.org/NebulousLabs/Nodejs-Sia/dev-status.svg)](https://david-dm.org/NebulousLabs/Nodejs-Sia#info=devDependencies)
-[![dependencies Status](https://david-dm.org/NebulousLabs/Nodejs-Sia.svg)](https://david-dm.org/NebulousLabs/Nodejs-Sia#info=dependencies)
+[![devDependency Status](https://david-dm.org/420coupe/Nodejs-Siaprime/dev-status.svg)](https://david-dm.org/420coupe/Nodejs-SiaPrime#info=devDependencies)
+[![dependencies Status](https://david-dm.org/420coupe/Nodejs-SiaPrime.svg)](https://david-dm.org/420coupe/Nodejs-SiaPrime#info=dependencies)
 [![license:mit](https://img.shields.io/badge/license-mit-blue.svg)](https://opensource.org/licenses/MIT)
 
 # A Highly Efficient Decentralized Storage Network
 
 This is a [Nodejs](https://nodejs.org/) wrapper for
-[Sia](https://github.com/NebulousLabs/Sia). Use it in your apps to easily
-interact with the Sia storage network via function calls instead of manual http
+[SiaPrime](https://gitlab.com/SiaPrime/Sia). Use it in your apps to easily
+interact with the SiaPrime storage network via function calls instead of manual http
 requests.
 
 ## Prerequisites
@@ -20,19 +20,19 @@ requests.
 ## Installation
 
 ```
-npm install sia.js
+npm install siap.js
 ```
 
 ## Example Usage
 
 ```js
-import { connect } from 'sia.js'
+import { connect } from 'siap.js'
 
 // Using promises...
-// connect to an already running Sia daemon on localhost:9980 and print its version
-connect('localhost:9980')
-  .then((siad) => {
-    siad.call('/daemon/version').then((version) => console.log(version))
+// connect to an already running SiaPrime daemon on localhost:4280 and print its version
+connect('localhost:4280')
+  .then((spd) => {
+    spd.call('/daemon/version').then((version) => console.log(version))
   })
   .catch((err) => {
     console.error(err)
@@ -41,9 +41,9 @@ connect('localhost:9980')
 // Or ES7 async/await
 async function getVersion() {
   try {
-    const siad = await connect('localhost:9980')
-    const version = await siad.call('/daemon/version')
-    console.log('Siad has version: ' + version)
+    const spd = await connect('localhost:4280')
+    const version = await spd.call('/daemon/version')
+    console.log('spd has version: ' + version)
   } catch (e) {
     console.error(e)
   }
@@ -53,7 +53,7 @@ async function getVersion() {
 You can also forgo using `connect` and use `call` directly by providing an API address as the first parameter:
 
 ```js
-import { call } from 'sia.js'
+import { call } from 'siap.js'
 
 async function getVersion(address) {
   try {
@@ -67,33 +67,33 @@ async function getVersion(address) {
 console.log(getVersion('10.0.0.1:9980'))
 ```
 
-`sia.js` can also launch a siad instance given a path on disk to the `siad` binary.  `launch` takes an object defining the flags to use as its second argument, and returns the `child_process` object.  You are responsible for keeping track of the state of this `child_process` object, and catching any errors `launch` may throw.
+`siap.js` can also launch a spd instance given a path on disk to the `spd` binary.  `launch` takes an object defining the flags to use as its second argument, and returns the `child_process` object.  You are responsible for keeping track of the state of this `child_process` object, and catching any errors `launch` may throw.
 
 ```js
-import { launch } from 'sia.js'
+import { launch } from 'siap.js'
 
 try {
   // Flags are passed in as an object in the second argument to `launch`.
   // if no flags are passed, the default flags will be used.
-  const siadProcess = launch('/path/to/your/siad', {
+  const spdProcess = launch('/path/to/your/spd', {
     'modules': 'cghmrtw',
     'profile': true,
   })
-  // siadProcess is a ChildProcess class.  See https://nodejs.org/api/child_process.html#child_process_class_childprocess for more information on what you can do with it.
-  siadProcess.on('error', (err) => console.log('siad encountered an error ' + err))
+  // spdProcess is a ChildProcess class.  See https://nodejs.org/api/child_process.html#child_process_class_childprocess for more information on what you can do with it.
+  spdProcess.on('error', (err) => console.log('siad encountered an error ' + err))
 } catch (e) {
-  console.error('error launching siad: ' + e.toString())
+  console.error('error launching spd: ' + e.toString())
 }
 ```
 
 The call object passed as the first argument into call() are funneled directly
 into the [`request`](https://github.com/request/request) library, so checkout
 [their options](https://github.com/request/request#requestoptions-callback) to
-see how to access the full functionality of [Sia's
-API](https://github.com/NebulousLabs/Sia/blob/master/doc/API.md)
+see how to access the full functionality of [SiaPrime's
+API](https://gitlab.com/SiaPrime/Sia/blob/master/doc/API.md)
 
 ```js
-Siad.call({
+Spd.call({
   url: '/consensus/block',
   method: 'GET',
   qs: {

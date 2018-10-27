@@ -1,23 +1,23 @@
 {
-  "name": "sia.js",
-  "version": "0.4.2",
-  "description": "Node wrapper for siad of the Sia network",
+  "name": "siap.js",
+  "version": "0.0.1",
+  "description": "Node wrapper for spd of the SiaPrime network",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/NebulousLabs/Nodejs-Sia.git"
+    "url": "git+https://github.com/420coupe/Nodejs-SiaPrime.git"
   },
-  "main": "lib/sia.js",
+  "main": "lib/siap.js",
   "scripts": {
     "build": "babel -d lib/ src/",
     "test": "npm run lint && mocha --compilers js:babel-register --recursive ./test",
     "prepublish": "npm run build",
     "lint": "eslint --max-warnings 0 ./src ./test",
-    "kill": "killall siad; while pgrep siad; do sleep .5; done;",
+    "kill": "killall spd; while pgrep spd; do sleep .5; done;",
     "clean": "npm run kill && rm -rf Sia node_modules"
   },
   "keywords": [
-    "Sia",
-    "Sia-UI",
+    "SiaPrime",
+    "SiaP-UI",
     "Decentralized",
     "Cloud",
     "Storage",
@@ -25,7 +25,7 @@
     "Cryptocurrency"
   ],
   "bugs": {
-    "url": "https://github.com/NebulousLabs/Nodejs-Sia/issues"
+    "url": "https://github.com/420coupe/Nodejs-SiaPrime/issues"
   },
   "author": "Nebulous Labs",
   "license": "MIT",

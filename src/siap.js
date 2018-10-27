@@ -1,5 +1,5 @@
-// sia.js: a lightweight node wrapper for starting, and communicating with
-// a Sia daemon (siad).
+// siap.js: a lightweight node wrapper for starting, and communicating with
+// a SiaPrime daemon (spd).
 import BigNumber from 'bignumber.js'
 import fs from 'fs'
 import { spawn } from 'child_process'
@@ -12,8 +12,8 @@ const agent = new http.Agent({
 	maxSockets: 20,
 })
 
-// sia.js error constants
-export const errCouldNotConnect = new Error('could not connect to the Sia daemon')
+// siap.js error constants
+export const errCouldNotConnect = new Error('could not connect to the SiaPrime daemon')
 
 // Siacoin -> hastings unit conversion functions
 // These make conversion between units of Sia easy and consistent for developers.
@@ -21,9 +21,9 @@ export const errCouldNotConnect = new Error('could not connect to the Sia daemon
 BigNumber.config({ EXPONENTIAL_AT: 1e+9 })
 BigNumber.config({ DECIMAL_PLACES: 30 })
 
-const hastingsPerSiacoin = new BigNumber('10').toPower(24)
-const siacoinsToHastings = (siacoins) => new BigNumber(siacoins).times(hastingsPerSiacoin)
-const hastingsToSiacoins = (hastings) => new BigNumber(hastings).dividedBy(hastingsPerSiacoin)
+const hastingsPerSiaPrimecoin = new BigNumber('10').toPower(24)
+const siaprimecoinsToHastings = (siaprimecoins) => new BigNumber(siaprimecoins).times(hastingsPerSiaPrimecoin)
+const hastingsToSiaPrimecoins = (hastings) => new BigNumber(hastings).dividedBy(hastingsPerSiaPrimecoin)
 
 // makeRequest takes an address and opts and returns a valid request.js request
 // options object.
@@ -38,14 +38,14 @@ export const makeRequest = (address, opts) => {
 		callOptions.timeout = 10000
 	}
 	callOptions.headers = {
-		'User-Agent': 'Sia-Agent',
+		'User-Agent': 'SiaPrime-Agent',
 	}
 	callOptions.pool = agent
 
 	return callOptions
 }
 
-// Call makes a call to the Sia API at `address`, with the request options defined by `opts`.
+// Call makes a call to the SiaPrime API at `address`, with the request options defined by `opts`.
 // returns a promise which resolves with the response if the request completes successfully
 // and rejects with the error if the request fails.
 const call = (address, opts) => new Promise((resolve, reject) => {
@@ -61,14 +61,14 @@ const call = (address, opts) => new Promise((resolve, reject) => {
 	})
 })
 
-// launch launches a new instance of siad using the flags defined by `settings`.
+// launch launches a new instance of spd using the flags defined by `settings`.
 // this function can `throw`, callers should catch errors.
 // callers should also handle the lifecycle of the spawned process.
 const launch = (path, settings) => {
 	const defaultSettings = {
-		'api-addr': 'localhost:9980',
-		'host-addr': ':9982',
-		'rpc-addr': ':9981',
+		'api-addr': 'localhost:4280',
+		'host-addr': ':4282',
+		'rpc-addr': ':4281',
 		'authenticate-api': false,
 		'disable-api-security': false,
 	}
@@ -77,26 +77,26 @@ const launch = (path, settings) => {
 	const mapFlags = (key) => '--' + key + '=' + mergedSettings[key]
 	const flags = Object.keys(mergedSettings).filter(filterFlags).map(mapFlags)
 
-	const siadOutput = (() => {
-		if (typeof mergedSettings['sia-directory'] !== 'undefined') {
-			return fs.createWriteStream(Path.join(mergedSettings['sia-directory'], 'siad-output.log'))
+	const spdOutput = (() => {
+		if (typeof mergedSettings['siaprime-directory'] !== 'undefined') {
+			return fs.createWriteStream(Path.join(mergedSettings['siaprime-directory'], 'spd-output.log'))
 		}
-		return fs.createWriteStream('siad-output.log')
+		return fs.createWriteStream('spd-output.log')
 	})()
 
 	const opts = { }
 	if (process.geteuid) {
 		opts.uid = process.geteuid()
 	}
-	const siadProcess = spawn(path, flags, opts)
-	siadProcess.stdout.pipe(siadOutput)
-	siadProcess.stderr.pipe(siadOutput)
-	return siadProcess
+	const spdProcess = spawn(path, flags, opts)
+	spdProcess.stdout.pipe(spdOutput)
+	spdProcess.stderr.pipe(spdOutput)
+	return spdProcess
 }
 
 // isRunning returns true if a successful call can be to /gateway
 // using the address provided in `address`.  Note that this call does not check
-// whether the siad process is still running, it only checks if a Sia API is
+// whether the spd process is still running, it only checks if a SiaPrime API is
 // reachable.
 async function isRunning(address) {
 	try {
@@ -110,22 +110,22 @@ async function isRunning(address) {
 	}
 }
 
-// siadWrapper returns an instance of a Siad API configured with address.
-const siadWrapper = (address) => {
-	const siadAddress = address
+// spdWrapper returns an instance of a SiaPrime API configured with address.
+const spdWrapper = (address) => {
+	const spdAddress = address
 	return {
-		call: (options)  => call(siadAddress, options),
-		isRunning: () => isRunning(siadAddress),
+		call: (options)  => call(spdAddress, options),
+		isRunning: () => isRunning(spdAddress),
 	}
 }
 
-// connect connects to a running Siad at `address` and returns a siadWrapper object.
+// connect connects to a running spd at `address` and returns a spdWrapper object.
 async function connect(address) {
 	const running = await isRunning(address)
 	if (!running) {
 		throw errCouldNotConnect
 	}
-	return siadWrapper(address)
+	return spdWrapper(address)
 }
 
 export {
@@ -133,7 +133,7 @@ export {
 	launch,
 	isRunning,
 	call,
-	siacoinsToHastings,
-	hastingsToSiacoins,
+	siaprimecoinsToHastings,
+	hastingsToSiaPrimecoins,
 	agent,
 }
