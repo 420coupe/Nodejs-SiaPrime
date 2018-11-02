@@ -33,32 +33,32 @@ const hastingsPerSiaPrimecoin = new BigNumber('1000000000000000000000000')
 
 describe('siaprime.js wrapper library', () => {
 	describe('unit conversion functions', () => {
-		it('converts from siaprimecoins to hastings correctly', () => {
+		it('converts from siacoins to hastings correctly', () => {
 			const maxSC = new BigNumber('100000000000000000000000')
 			for (let i = 0; i < 999; i++) {
 				const sc = maxSC.times(Math.trunc(Math.random() * 100000) / 100000)
-				const expectedHastings = sc.times(hastingsPerSiaPrimecoin)
-				expect(siaprimecoinsToHastings(sc).toString()).to.equal(expectedHastings.toString())
+				const expectedHastings = sc.times(hastingsPerSiacoin)
+				expect(siacoinsToHastings(sc).toString()).to.equal(expectedHastings.toString())
 			}
 		})
-		it('converts from hastings to siaprimecoins correctly', () => {
+		it('converts from hastings to siacoins correctly', () => {
 			const maxH = new BigNumber('10').toPower(150)
 			for (let i = 0; i < 999; i++) {
 				const h = maxH.times(Math.trunc(Math.random() * 100000) / 100000)
-				const expectedSiaPrimecoins = h.dividedBy(hastingsPerSiaPrimecoin)
-				expect(hastingsToSiaPrimecoins(h).toString()).to.equal(expectedSiaPrimecoins.toString())
+				const expectedSiacoins = h.dividedBy(hastingsPerSiacoin)
+				expect(hastingsToSiacoins(h).toString()).to.equal(expectedSiacoins.toString())
 			}
 		})
 		it('does not lose precision during unit conversions', () => {
 			// convert from base unit -> siaprimecoins n_iter times, comparing the (n_iter-times) converted value at the end.
 			// if precision loss were occuring, the original and the converted value would differ.
 			const n_iter = 10000
-			const originalSiaPrimecoin = new BigNumber('1337338498282837188273')
-			let convertedSiaPrimecoin = originalSiaPrimecoin
+			const originalSiacoin = new BigNumber('1337338498282837188273')
+			let convertedSiacoin = originalSiacoin
 			for (let i = 0; i < n_iter; i++) {
-				convertedSiaPrimecoin = hastingsToSiaPrimecoins(siaprimecoinsToHastings(convertedSiaPrimecoin))
+				convertedSiacoin = hastingsToSiacoins(siacoinsToHastings(convertedSiacoin))
 			}
-			expect(convertedSiaPrimecoin.toString()).to.equal(originalSiaPrimecoin.toString())
+			expect(convertedSiacoin.toString()).to.equal(originalSiacoin.toString())
 		})
 	})
 	describe('spd interaction functions', () => {
@@ -96,7 +96,7 @@ describe('siaprime.js wrapper library', () => {
 			})
 
 			let spd
-			it('returns a valid spd object if siaprime is reachable', async() => {
+			it('returns a valid spd object if sia is reachable', async() => {
 				nock('http://localhost:4280')
 				  .get('/gateway')
 				  .reply(200, 'success')

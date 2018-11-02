@@ -75,8 +75,8 @@ import { launch } from 'siaprime.js'
 try {
   // Flags are passed in as an object in the second argument to `launch`.
   // if no flags are passed, the default flags will be used.
-  const spdProcess = launch('/path/to/your/spd', {
-    'modules': 'cghmrtw',
+  const spdProcess = launch('/root/go/bin/spd', {
+    'modules': 'cgehmrtw',
     'profile': true,
   })
   // spdProcess is a ChildProcess class.  See https://nodejs.org/api/child_process.html#child_process_class_childprocess for more information on what you can do with it.

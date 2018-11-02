@@ -21,9 +21,9 @@ export const errCouldNotConnect = new Error('could not connect to the SiaPrime d
 BigNumber.config({ EXPONENTIAL_AT: 1e+9 })
 BigNumber.config({ DECIMAL_PLACES: 30 })
 
-const hastingsPerSiaPrimecoin = new BigNumber('10').toPower(24)
-const siaprimecoinsToHastings = (siaprimecoins) => new BigNumber(siaprimecoins).times(hastingsPerSiaPrimecoin)
-const hastingsToSiaPrimecoins = (hastings) => new BigNumber(hastings).dividedBy(hastingsPerSiaPrimecoin)
+const hastingsPerSiacoin = new BigNumber('10').toPower(24)
+const siacoinsToHastings = (siacoins) => new BigNumber(siacoins).times(hastingsPerSiacoin)
+const hastingsToSiacoins = (hastings) => new BigNumber(hastings).dividedBy(hastingsPerSiacoin)
 
 // makeRequest takes an address and opts and returns a valid request.js request
 // options object.
@@ -133,7 +133,7 @@ export {
 	launch,
 	isRunning,
 	call,
-	siaprimecoinsToHastings,
-	hastingsToSiaPrimecoins,
+	siacoinsToHastings,
+	hastingsToSiacoins,
 	agent,
 }
