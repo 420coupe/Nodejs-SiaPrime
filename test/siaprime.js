@@ -120,7 +120,7 @@ describe('siaprime.js wrapper library', () => {
 					json: true,
 					timeout: 10000,
 					headers: {
-						'User-Agent': 'SiaPrime-Agent',
+						'User-Agent': 'ScPrime-Agent',
 					},
 				}
 				expect(makeRequest('localhost:4280', '/test')).to.contain.keys(expectedOpts)
@@ -133,7 +133,7 @@ describe('siaprime.js wrapper library', () => {
 					url: 'http://localhost:4280/test',
 					qs: testparams,
 					headers: {
-						'User-Agent': 'SiaPrime-Agent',
+						'User-Agent': 'ScPrime-Agent',
 					},
 					timeout: 10000,
 					json: true,
