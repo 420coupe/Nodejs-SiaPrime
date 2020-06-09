@@ -1,7 +1,7 @@
 {
   "name": "siaprime.js",
-  "version": "0.0.5",
-  "description": "Node wrapper for spd of the SiaPrime network",
+  "version": "0.0.6",
+  "description": "Node wrapper for spd of the ScPrime network",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/420coupe/Nodejs-SiaPrime.git"
