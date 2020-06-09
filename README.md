@@ -1,4 +1,4 @@
-# [![SiaPrime Logo](https://siaprime.net/imagestore/primelogo_text_400x74.png](http://SiaPrime.net/) Nodejs Wrapper
+# [![ScPrime Logo](https://scpri.me/imagestore/primelogo_text_400x74.png](http://scpri.me/) Nodejs Wrapper
 
 [![Build Status](https://api.travis-ci.org/420coupe/Nodejs-SiaPrime.svg?branch=master)](https://travis-ci.org/420coupe/Nodejs-SiaPrime)
 [![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](http://standardjs.com/)
@@ -9,8 +9,8 @@
 # A Highly Efficient Decentralized Storage Network
 
 This is a [Nodejs](https://nodejs.org/) wrapper for
-[SiaPrime](https://gitlab.com/SiaPrime/Sia). Use it in your apps to easily
-interact with the SiaPrime storage network via function calls instead of manual http
+[ScPrime](https://gitlab.com/scpcorp/scprime). Use it in your apps to easily
+interact with the ScPrime storage network via function calls instead of manual http
 requests.
 
 ## Prerequisites
